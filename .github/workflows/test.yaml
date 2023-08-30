@@ -8,7 +8,7 @@ on:
 jobs:
   test-job:
     name: test-job
-    runs-on: [ self-hosted, hf, default ]
+    runs-on: [ self-hosted, linux, x64, ubuntu-latest, 2xlarge ]
     steps:
       - name: echo toto
         run: echo toto
