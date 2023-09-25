@@ -18,13 +18,17 @@ env:
   hfgpu: "--device /dev/dri/renderD128"
 
 jobs:
-
+  get-gpu:
+  runs-on: ubuntu-latest
+    outputs:
+      gpu: ${{ env.hfgpu }}
   check_runners:
-    name: Check Runners     
+    name: Check Runners    
+    needs: [get-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci  # <--- We test only for PyTorch for now
-      options: --device /dev/kfd ${{ env.hfgpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+      options: --device /dev/kfd ${{ needs.get-gpu.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
         run: |
