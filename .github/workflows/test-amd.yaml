@@ -14,9 +14,9 @@ env:
   MKL_NUM_THREADS: 8
   PYTEST_TIMEOUT: 60
   TF_FORCE_GPU_ALLOW_GROWTH: true
-  RUN_PT_TF_CROSS_TESTS: 1
-  HFGPU: --device /dev/dri/renderD128
-  IMAGE: huggingface/transformers-pytorch-amd-gpu-push-ci
+  RUN_PT_TF_CROSS_TESTS: 1"
+  HFGPU: "--device /dev/dri/renderD128"
+  IMAGE: "huggingface/transformers-pytorch-amd-gpu-push-ci"
 
 jobs:
   get-gpu:
