@@ -25,7 +25,7 @@ jobs:
     steps:
       - id: "my_step"
         run: |
-          image="huggingface/transformers-pytorch-amd-gpu-push-ci"
+          image=$(./get_gpu.sh)
           echo "Output [$image]"
           echo "image=$image" >> $GITHUB_OUTPUT   
   check_runners:
