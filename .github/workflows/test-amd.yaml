@@ -25,7 +25,7 @@ jobs:
       gpu: ${{ env.HFGPU }}
       image: ${{ env.IMAGE }}
     steps:
-      - run: echo "null"
+      - run: echo $LANG
   check_runners:
     name: Check Runners    
     needs: [get-gpu]
