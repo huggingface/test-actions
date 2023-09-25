@@ -33,4 +33,4 @@ jobs:
     steps:
       - name: ROCM-SMI
         run: |
-          rocm-smi
+          rocminfo  |grep "Agent" -A 14
