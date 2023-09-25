@@ -29,10 +29,9 @@ jobs:
     needs: [get-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
-      image: ${{ runner.os }}  # <--- We test only for PyTorch for now
       options: --device /dev/kfd ${{ needs.get-gpu.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
-    with:
-      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      with:
+        image: {{IMAGE}}
     steps:
       - name: ROCM-SMI
         run: |
