@@ -20,6 +20,8 @@ env:
 jobs:
   get-gpu:
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
+    outputs:
+      image: ${{steps.my_step.outputs.image}}
     steps:
       - id: "my_step"
         run: |
@@ -31,7 +33,7 @@ jobs:
     needs: [get-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
-      image: ${{steps.my_step.outputs.image}}
+      image: ${{needs.get-gpu.outputs.image}}
       options: --device /dev/kfd ${{ needs.get-gpu.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
