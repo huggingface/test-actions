@@ -21,20 +21,18 @@ jobs:
   get-gpu:
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     outputs:
-      image: ${{steps.my_step.outputs.image}}
+      gpu: ${{steps.getgpu.outputs.gpu}}
     steps:
-      - id: "my_step"
+      - id: "getgpu"
         run: |
-          image=$(./get_gpu.sh)
-          echo "Output [$image]"
-          echo "image=$image" >> $GITHUB_OUTPUT   
+          echo "gpu=$gpu" >> $GITHUB_OUTPUT   
   check_runners:
     name: Check Runners    
     needs: [get-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
-      image: ${{needs.get-gpu.outputs.image}}
-      options: --device /dev/kfd ${{ needs.get-gpu.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      options: --device /dev/kfd ${{ needs.get-gpu.outputs.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
         run: |
