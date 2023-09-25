@@ -19,7 +19,7 @@ env:
 
 jobs:
   get-gpu:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     outputs:
       gpu: ${{ env.HFGPU }}
     steps:
