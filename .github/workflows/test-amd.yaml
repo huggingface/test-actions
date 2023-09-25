@@ -27,7 +27,6 @@ jobs:
       - name: ROCM-SMI
         run: |
           rocminfo  |grep "Agent" -A 14
-    steps:
       - name: "show HIP env"
         run: |
           echo "Output HIP: $HIP_VISIBLE_DEVICES"
