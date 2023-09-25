@@ -20,9 +20,6 @@ jobs:
 
   check_runners:
     name: Check Runners
-    strategy:
-      matrix:
-        machine_type: [single-gpu, multi-amd-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci  # <--- We test only for PyTorch for now
