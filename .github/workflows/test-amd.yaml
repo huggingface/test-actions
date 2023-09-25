@@ -23,7 +23,7 @@ jobs:
     outputs:
       gpu: ${{ env.HFGPU }}
     steps:
-      - run: echo $LANG
+      - run: echo $IMAGE
   check_runners:
     name: Check Runners    
     needs: [get-gpu]
