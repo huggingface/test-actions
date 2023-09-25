@@ -32,7 +32,7 @@ jobs:
           echo "gpu=$GPU" >> $GITHUB_OUTPUT   
   check_runners:
     name: Check Runners    
-    needs: [get-gpu]
+    needs: [get_context]
     runs-on: ${{needs.get_context.outputs.runner}}
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
