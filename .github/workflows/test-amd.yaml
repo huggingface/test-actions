@@ -15,8 +15,6 @@ env:
   PYTEST_TIMEOUT: 60
   TF_FORCE_GPU_ALLOW_GROWTH: true
   RUN_PT_TF_CROSS_TESTS: 1"
-  HFGPU: "--device /dev/dri/renderD128"
-  IMAGE: huggingface/transformers-pytorch-amd-gpu-push-ci
 
 jobs:
   get_context:
@@ -35,9 +33,7 @@ jobs:
     needs: [get_context]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
-      #image: huggingface/transformers-pytorch-amd-gpu-push-ci
-      #image: ${{ github.workspace }}
-      image: ${$IMAGE}
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
       options: --device /dev/kfd ${{ needs.get_context.outputs.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
