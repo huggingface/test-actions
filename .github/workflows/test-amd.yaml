@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       gpu: ${{ env.hfgpu }}
+    steps:
+      - run: echo "null"
   check_runners:
     name: Check Runners    
     needs: [get-gpu]
