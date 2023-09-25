@@ -21,11 +21,11 @@ jobs:
   get-gpu:
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     steps:
-      id: "my_step"
-      - run: |
-      image="huggingface/transformers-pytorch-amd-gpu-push-ci"
-      echo "Output [$image]"
-      echo "image=$image" >> $GITHUB_OUTPUT   
+      - id: "my_step"
+        run: |
+          image="huggingface/transformers-pytorch-amd-gpu-push-ci"
+          echo "Output [$image]"
+          echo "image=$image" >> $GITHUB_OUTPUT   
   check_runners:
     name: Check Runners    
     needs: [get-gpu]
