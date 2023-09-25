@@ -32,7 +32,7 @@ jobs:
     needs: [get-gpu]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
-      image: ${{ IMAGE }}
+      image: ${{ github.IMAGE }}
       options: --device /dev/kfd ${{ needs.get-gpu.outputs.gpu }} --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
