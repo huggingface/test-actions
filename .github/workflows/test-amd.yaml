@@ -22,7 +22,7 @@ jobs:
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
-      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
     steps:
       - name: ROCM-SMI
         run: |
@@ -30,3 +30,4 @@ jobs:
       - name: "show HIP env"
         run: |
           echo "Output HIP: $HIP_VISIBLE_DEVICES"
+          echo "Output HIP: $ROCR_VISIBLE_DEVICES"
