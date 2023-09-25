@@ -25,6 +25,7 @@ jobs:
     steps:
       - id: "getgpu"
         run: |
+          echo "Output $gpu"
           echo "gpu=$gpu" >> $GITHUB_OUTPUT   
   check_runners:
     name: Check Runners    
