@@ -15,13 +15,12 @@ env:
   PYTEST_TIMEOUT: 60
   TF_FORCE_GPU_ALLOW_GROWTH: true
   RUN_PT_TF_CROSS_TESTS: 1
+  hfgpu: "--device /dev/dri/renderD128"
 
 jobs:
 
   check_runners:
-    name: Check Runners
-    env:
-      hfgpu: "--device /dev/dri/renderD128"
+    name: Check Runners     
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci  # <--- We test only for PyTorch for now
