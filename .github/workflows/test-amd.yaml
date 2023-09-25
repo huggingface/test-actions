@@ -44,4 +44,4 @@ jobs:
       - name: "show HIP env"
         run: |
           echo "Output HIP: $HIP_VISIBLE_DEVICES"
-          echo "Output HIP: $ROCR_VISIBLE_DEVICES"
+          echo "Output ROCR: $ROCR_VISIBLE_DEVICES"
