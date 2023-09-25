@@ -19,7 +19,7 @@ env:
 
 jobs:
   get-gpu:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     outputs:
       gpu: ${{ env.hfgpu }}
   check_runners:
