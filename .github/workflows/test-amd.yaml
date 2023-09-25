@@ -17,15 +17,8 @@ env:
   RUN_PT_TF_CROSS_TESTS: 1"
 
 jobs:
-  get_context:
-    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
-    steps:
-      - id: "gethip"
-        run: |
-          echo "Output HIP: $HIP_VISIBLE_DEVICES"
   check_runners:
     name: Check Runners    
-    needs: [get_context]
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
@@ -34,3 +27,7 @@ jobs:
       - name: ROCM-SMI
         run: |
           rocminfo  |grep "Agent" -A 14
+    steps:
+      - id: "show HIP env"
+        run: |
+          echo "Output HIP: $HIP_VISIBLE_DEVICES"
