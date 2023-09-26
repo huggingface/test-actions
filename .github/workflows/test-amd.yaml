@@ -18,7 +18,7 @@ env:
 
 jobs:
   check_runners:
-    name: Check Runners    
+    name: Check Runners 1 (multi-gpu) 
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
@@ -32,8 +32,67 @@ jobs:
           echo "Output HIP: $HIP_VISIBLE_DEVICES"
           echo "Output HIP: $ROCR_VISIBLE_DEVICES"
   check_runners2:
-    name: Check Runners    
+    name: Check Runners 2 (multi-gpu)   
     runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi210]
+    container:
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+    steps:
+      - name: ROCM-SMI
+        run: |
+          rocminfo  |grep "Agent" -A 14
+      - name: "show HIP env"
+        run: |
+          echo "Output HIP: $HIP_VISIBLE_DEVICES"
+          echo "Output ROCR: $ROCR_VISIBLE_DEVICES"
+  check_runners3:
+    name: Check Runners 1 (single-gpu)    
+    runs-on: [self-hosted, docker-gpu, amd-gpu, single-gpu, mi210]
+    container:
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+    steps:
+      - name: ROCM-SMI
+        run: |
+          rocminfo  |grep "Agent" -A 14
+      - name: "show HIP env"
+        run: |
+          echo "Output HIP: $HIP_VISIBLE_DEVICES"
+          echo "Output ROCR: $ROCR_VISIBLE_DEVICES"
+  
+  check_runners4:
+    name: Check Runners 2 (single-gpu)    
+    runs-on: [self-hosted, docker-gpu, amd-gpu, single-gpu, mi210]
+    container:
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+    steps:
+      - name: ROCM-SMI
+        run: |
+          rocminfo  |grep "Agent" -A 14
+      - name: "show HIP env"
+        run: |
+          echo "Output HIP: $HIP_VISIBLE_DEVICES"
+          echo "Output ROCR: $ROCR_VISIBLE_DEVICES"
+  
+  check_runners5:
+    name: Check Runners 3 (single-gpu)    
+    runs-on: [self-hosted, docker-gpu, amd-gpu, single-gpu, mi210]
+    container:
+      image: huggingface/transformers-pytorch-amd-gpu-push-ci
+      options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
+    steps:
+      - name: ROCM-SMI
+        run: |
+          rocminfo  |grep "Agent" -A 14
+      - name: "show HIP env"
+        run: |
+          echo "Output HIP: $HIP_VISIBLE_DEVICES"
+          echo "Output ROCR: $ROCR_VISIBLE_DEVICES"
+  
+  check_runners6:
+    name: Check Runners 4 (single-gpu)    
+    runs-on: [self-hosted, docker-gpu, amd-gpu, single-gpu, mi210]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
       options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
