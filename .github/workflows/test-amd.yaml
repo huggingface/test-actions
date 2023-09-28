@@ -19,7 +19,7 @@ env:
 jobs:
   check_runners:
     name: Check Runners 1 (multi-gpu) 
-    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi250]
+    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-gpu, mi250]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
       options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
@@ -33,7 +33,7 @@ jobs:
           echo "Output HIP: $ROCR_VISIBLE_DEVICES"
   check_runners2:
     name: Check Runners 2 (multi-gpu)   
-    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-amd-gpu, mi250]
+    runs-on: [self-hosted, docker-gpu, amd-gpu, multi-gpu, mi250]
     container:
       image: huggingface/transformers-pytorch-amd-gpu-push-ci
       options: --device /dev/kfd --device /dev/dri --shm-size "16gb" --env HIP_VISIBLE_DEVICES --env ROCR_VISIBLE_DEVICES --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
