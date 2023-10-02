@@ -1,0 +1,14 @@
+name: test OSX Runner
+
+on:
+  push:
+    branches:
+      - ci-apple*
+
+jobs:
+  test-job:
+    name: check-runner
+    runs-on: [ self-hosted, osx, arm64, apple-m1 ]
+    steps:
+      - name: hostname
+        run: hostname
